@@ -1,0 +1,46 @@
+buildscript {
+    ext { springBootVersion = '1.5.9.RELEASE' }
+    repositories { mavenCentral() }
+    dependencies { classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'dream-app'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+
+repositories { mavenCentral() }
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    //compile project(':dream-library')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '1.5.9.RELEASE'
+
+}
+
+test {
+    testLogging {
+        // Make sure output from
+        // standard out or error is shown
+        // in Gradle output.
+        showStandardStreams = true
+
+        // Or we use events method:
+        //events 'standard_out', 'standard_error'
+
+        // Or set property events:
+        // events = ['standard_out', 'standard_error']
+
+        // Instead of string values we can
+        // use enum values:
+        // events org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT,
+        //       org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
+    }
+}
